@@ -7,10 +7,10 @@ Public Class frmMain
     Dim Precision As Integer
     Dim Cancelled As Boolean
 
-    Private Sub cmdSource_Click(sender As Object, e As EventArgs)
+    Private Sub cmdSource_Click(sender As Object, e As EventArgs) Handles cmdSource.Click
         Dim fd As FolderBrowserDialog = New FolderBrowserDialog
 
-        fd.SelectedPath = "C:\Users\Paul"
+        fd.SelectedPath = My.Computer.FileSystem.SpecialDirectories.MyPictures
 
         If fd.ShowDialog() = DialogResult.OK Then
             txtSource.Text = fd.SelectedPath
@@ -27,12 +27,14 @@ Public Class frmMain
         cmdEXIF.Enabled = False
         cmdCancel.Enabled = True
         Cancelled = False
+        Me.Cursor = Cursors.AppStarting
 
         Call ScanFolder(txtSource.Text)
         MessageBox.Show("Done!")
 
         cmdEXIF.Enabled = True
         cmdCancel.Enabled = False
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ScanFolder(ByVal Foldername As String)
@@ -90,11 +92,29 @@ Public Class frmMain
                     CheckFolderExists(DestFolder)
                 End If
                 FileCount = FileCount + 1
-                My.Computer.FileSystem.CopyFile(Filename, DestFolder & "\" & "PHO" & Format(FileCount, "000000000") & ".jpg")
+
+                Dim FilesInFolder As Long
+                FilesInFolder = CountFilesInFolder(DestFolder)
+
+                Dim DestFileName As String
+                Do
+                    DestFileName = DestFolder & "\" & "PHO" & Format(FilesInFolder, "000000000") & ".jpg"
+                    If My.Computer.FileSystem.FileExists(DestFileName) = False Then
+                        Exit Do
+                    End If
+
+                    FilesInFolder = FilesInFolder + 1
+                Loop
+
+                My.Computer.FileSystem.CopyFile(Filename, DestFileName)
             End If
         Next
 
     End Sub
+
+    Private Function CountFilesInFolder(ByVal FolderName As String) As Long
+        Return My.Computer.FileSystem.GetDirectoryInfo(FolderName).GetFiles().Count
+    End Function
 
     Private Sub CheckFolderExists(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then
@@ -102,10 +122,10 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub cmdDest_Click(sender As Object, e As EventArgs)
+    Private Sub cmdDest_Click(sender As Object, e As EventArgs) Handles cmdDest.Click
         Dim fd As FolderBrowserDialog = New FolderBrowserDialog
 
-        fd.SelectedPath = "C:\Users\Paul"
+        fd.SelectedPath = My.Computer.FileSystem.SpecialDirectories.MyDocuments
 
         If fd.ShowDialog() = DialogResult.OK Then
             txtDest.Text = fd.SelectedPath
