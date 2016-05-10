@@ -148,6 +148,14 @@ Public Class frmMain
                     Exit For
                 End If
             Next
+
+            If RetVal Like "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]" Then
+                ' It is a date!
+            ElseIf chkFileDate.Checked = True Then
+                Dim ThisPic As FileInfo = New FileInfo(Filename)
+
+                RetVal = ThisPic.CreationTime.ToString("yyyy-MM-dd")
+            End If
         Catch ex As Exception
 
         End Try

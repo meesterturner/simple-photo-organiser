@@ -42,6 +42,7 @@ Partial Class frmMain
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblStatus = New System.Windows.Forms.Label()
+        Me.chkFileDate = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -68,6 +69,7 @@ Partial Class frmMain
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.chkFileDate)
         Me.GroupBox1.Controls.Add(Me.cboPrecision)
         Me.GroupBox1.Controls.Add(Me.lblPrecision)
         Me.GroupBox1.Controls.Add(Me.lblDest)
@@ -170,18 +172,18 @@ Partial Class frmMain
         'OrganiseToolStripMenuItem
         '
         Me.OrganiseToolStripMenuItem.Name = "OrganiseToolStripMenuItem"
-        Me.OrganiseToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OrganiseToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.OrganiseToolStripMenuItem.Text = "&Organise"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(118, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'HelpToolStripMenuItem
@@ -194,7 +196,7 @@ Partial Class frmMain
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.AboutToolStripMenuItem.Text = "&About"
         '
         'GroupBox2
@@ -215,6 +217,16 @@ Partial Class frmMain
         Me.lblStatus.Size = New System.Drawing.Size(39, 13)
         Me.lblStatus.TabIndex = 8
         Me.lblStatus.Text = "Label1"
+        '
+        'chkFileDate
+        '
+        Me.chkFileDate.AutoSize = True
+        Me.chkFileDate.Location = New System.Drawing.Point(193, 131)
+        Me.chkFileDate.Name = "chkFileDate"
+        Me.chkFileDate.Size = New System.Drawing.Size(196, 17)
+        Me.chkFileDate.TabIndex = 18
+        Me.chkFileDate.Text = "Use File Date if no date in Metadata"
+        Me.chkFileDate.UseVisualStyleBackColor = True
         '
         'frmMain
         '
@@ -261,4 +273,5 @@ Partial Class frmMain
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents lblStatus As Label
+    Friend WithEvents chkFileDate As CheckBox
 End Class
